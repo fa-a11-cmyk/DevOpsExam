@@ -1,0 +1,29 @@
+stages:
+  - build
+  - test
+  - deploy
+
+# Étape 1 : Build (Construire l'image Docker)
+build:
+  stage: build
+  script:
+    - docker build -t python-app:v1 .
+  only:
+    - main  # La pipeline s'exécute uniquement sur la branche 'main'
+
+# Étape 2 : Test (Exécuter les tests avec pytest)
+test:
+  stage: test
+  script:
+    - pytest app_test.py
+  only:
+    - main  # La pipeline s'exécute uniquement sur la branche 'main'
+
+# Étape 3 : Deploy (Simuler le déploiement)
+deploy:
+  stage: deploy
+  script:
+    - echo "Deploying..."
+  only:
+    - main  # La pipeline s'exécute uniquement sur la branche 'main'
+
